@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Phone, Facebook, Youtube, Instagram, Linkedin, Twitter, User, Shield, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
@@ -51,34 +51,28 @@ const Landing = () => {
             </div>
 
             {/* Navigation */}
-            <div className="hidden md:flex items-center space-x-3">
-              <button 
-                onClick={() => navigate('/login')}
-                className="px-4 py-2 border border-blue-300 rounded text-sm hover:bg-blue-50 text-blue-600"
-              >
+            <div className="flex items-center space-x-3">
+              <button onClick={() => navigate('/login')} className="px-4 py-2 border border-blue-300 rounded text-sm hover:bg-blue-50 text-blue-600">
                 Citizen Login
               </button>
-
-              <button 
-                onClick={() => navigate('/login')}
-                className="px-4 py-2 border border-blue-300 rounded text-sm hover:bg-blue-50 text-blue-600"
-              >
+              <button onClick={() => navigate('/login')} className="px-4 py-2 border border-blue-300 rounded text-sm hover:bg-blue-50 text-blue-600">
                 Admin Login
               </button>
-
-              <button 
-                onClick={() => navigate('/register')}
-                className="px-4 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700"
-              >
+              <button onClick={() => navigate('/register')} className="px-4 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700">
                 Register
+              </button>
+
+              {/* ✅ Account Settings button */}
+              <button
+                onClick={() => navigate('/settings')}
+                className="px-4 py-2 border border-yellow-300 rounded text-sm hover:bg-yellow-50 text-yellow-600"
+              >
+                Account Settings
               </button>
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden"
-            >
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -119,10 +113,7 @@ const Landing = () => {
             {/* Service Categories */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               {serviceCategories.map((service, index) => (
-                <button
-                  key={index}
-                  className={`px-6 py-3 rounded-full border border-gray-300 transition-all duration-200 ${service.color}`}
-                >
+                <button key={index} className={`px-6 py-3 rounded-full border border-gray-300 transition-all duration-200 ${service.color}`}>
                   {service.name}
                 </button>
               ))}
@@ -135,14 +126,8 @@ const Landing = () => {
               </h3>
               <div className="space-y-4">
                 {faqs.map((faq, index) => (
-                  <div
-                    key={index}
-                    className="border border-gray-200 rounded-lg shadow-sm bg-white"
-                  >
-                    <button
-                      onClick={() => toggleFaq(index)}
-                      className="w-full flex justify-between items-center p-4 text-left"
-                    >
+                  <div key={index} className="border border-gray-200 rounded-lg shadow-sm bg-white">
+                    <button onClick={() => toggleFaq(index)} aria-expanded={openFaq === index} className="w-full flex justify-between items-center p-4 text-left">
                       <span className="font-medium text-gray-800">{faq.question}</span>
                       {openFaq === index ? (
                         <ChevronUp className="w-5 h-5 text-gray-500" />
@@ -157,7 +142,6 @@ const Landing = () => {
                 ))}
               </div>
             </section>
-
           </div>
         </div>
       </main>
